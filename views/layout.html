@@ -90,10 +90,13 @@
     console.log('connected to server via WebSockets!');
   });
   // When 'new_tweet' events are fired, do something with the packaged tweet
-  socket.on('newTweet', function (tweet) {
-    console.log(tweet);
-    alert('Refreshing... check the console...');
-    // some logic to add the new tweet to the DOM…
-  });
+  if(window.newTweet) socket.on('newTweet', window.newTweet);
 </script>
 </html>
+<!--
+<li>
+    <h3><a href="/users/{{tweet.name}}">{{tweet.name}}</a></h3>
+    {{tweet.content}}
+    <a href="/tweets/{{tweet.id}}">Direct Link</a>
+</li>
+          -->

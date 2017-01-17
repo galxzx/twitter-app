@@ -6,6 +6,9 @@ const routes = require ('./routes/');
 const bodyParser = require('body-parser');
 const socketio = require('socket.io');
 
+
+
+
 // Setup
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
@@ -15,9 +18,15 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Listen
+const server = app.listen(3000, function(){
+  console.log('Listening on port 3000');
+})
+const io = socketio.listen(server);
+
 
 // Routes
-app.use('/', routes);
+app.use('/', routes(io));
 
 app.use('/special', function(req, res, next){
   console.log('you reached the special area');
@@ -25,9 +34,5 @@ app.use('/special', function(req, res, next){
 });
 
 
-// Listen
-const server = app.listen(3000, function(){
-  console.log('Listening on port 3000');
-})
 
-const io = socketio.listen(server);
+

@@ -38,4 +38,20 @@
   </form>
 {% endif %}
 
+<script>
+function newTweet(tweet) {
+  console.log(tweet);
+
+  //alert('Refreshing... check the console...');
+  // some logic to add the new tweet to the DOM…
+  var tweetEle = document.createElement('li');
+  tweetEle.innerHTML = (
+    '<h3><a href="/users/' + tweet.name + '">' + tweet.name + '</a></h3>' +
+    tweet.content +
+    ' <a href="/tweets/' + tweet.id + '">Direct Link</a>'
+  );
+  document.getElementById('tweetList').appendChild(tweetEle);
+}
+</script>
+
 {% endblock %}
